@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HTML Viewer and Cleaner</title>
+<style>
+  /* Reset some default */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #333;
+  }
+
+  .container {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 30px 40px;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-weight: 700;
+    color: #0078d4;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  p {
+    text-align: center;
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 25px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 180px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    font-family: monospace;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+  }
+
+  textarea:focus {
+    border-color: #0078d4;
+    outline: none;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0 30px 0;
+  }
+
+  button {
+    background: #0078d4;
+    border: none;
+    color: white;
+    padding: 12px 22px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    flex: 1;
+    max-width: 160px;
+  }
+
+  button:hover {
+    background: #005a9e;
+  }
+
+  .output {
+    border: 1px solid #ddd;
+    background: #fafafa;
+    border-radius: 6px;
+    padding: 20px;
+    min-height: 180px;
+    white-space: pre-wrap;
+    color: #444;
+    display: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-y: auto;
+    max-height: 300px;
+  }
+
+  #rendered {
+    white-space: normal;
+  }
+
+  @media (max-width: 480px) {
+    .buttons {
+      flex-direction: column;
+    }
+    button {
+      max-width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h2>HTML Viewer and Cleaner</h2>
+    <p>Paste your HTML-encoded content below:</p>
+    <textarea id="inputHTML" placeholder="Paste HTML-encoded text here..."></textarea>
+    <div class="buttons">
+      <button onclick="showRaw()">Show Raw HTML</button>
+      <button onclick="showText()">Show Cleaned Text</button>
+      <button onclick="showRendered()">Show Rendered Preview</button>
+    </div>
+    <div id="raw" class="output"></div>
+    <div id="text" class="output"></div>
+    <div id="rendered" class="output"></div>
+  </div>
+
+  <script>
+    function decodeHTML(html) {
+      const txt = document.createElement('textarea');
+      txt.innerHTML = html;
+      return txt.value;
+    }
+
+    function showRaw() {
+      hideAll();
+      const input = document.getElementById('inputHTML').value;
+      document.getElementById('raw').textContent = decodeHTML(input);
+      document.getElementById('raw').style.display = 'block';
+    }
+
+    function showText() {
+      hideAll();
+      const input = document.getElementById('inputHTML').value;
+      const decoded = decodeHTML(input);
+      const temp = document.createElement('div');
+      temp.innerHTML = decoded;
+      document.getElementById('text').textContent = temp.innerText;
+      document.getElementById('text').style.display = 'block';
+    }
+
+    function showRendered() {
+      hideAll();
+      const input = document.getElementById('inputHTML').value;
+      const decoded = decodeHTML(input);
+      document.getElementById('rendered').innerHTML = decoded;
+      document.getElementById('rendered').style.display = 'block';
+    }
+
+    function hideAll() {
+      document.getElementById('raw').style.display = 'none';
+      document.getElementById('text').style.display = 'none';
+      document.getElementById('rendered').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HTML Viewer and Cleaner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <h1>HTML Viewer and Cleaner</h1>
+    <label for="inputHTML">Paste your HTML-encoded content below:</label>
+    <textarea id="inputHTML" placeholder="Paste HTML-encoded text here..."></textarea>
+    <div class="buttons">
+      <button id="btnRaw">Show Raw HTML</button>
+      <button id="btnText">Show Cleaned Text</button>
+      <button id="btnRendered">Show Rendered Preview</button>
+    </div>
+    <section id="outputs">
+      <div id="raw" class="output"></div>
+      <div id="text" class="output"></div>
+      <div id="rendered" class="output"></div>
+    </section>
+  </main>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
